@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+   PUBLIC "-//mybatis.org//DTD mapper 3.0/EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="kr.co.LotteSpec.dao.impl.mapper.ProductMapper">
+   <resultMap id="product-resultmap" type="Product">
+      <id property="id" column="id" />
+      <result property="prodName" column="prod_name" />
+      <result property="price" column="price" />
+      <result property="content" column="content" />
+      <result property="barcode" column = "barcode" />
+   </resultMap>
+
+   <select id="selectProduct"  parameterType = "integer" resultMap="product-resultmap">
+      select
+	      id,
+	      prod_name,
+	      price,
+	      content,
+	      barcode
+      from product
+      where id = #{value}
+   </select>
+   
+   <select id = "selectProducts"  resultMap="product-resultmap" >
+   		select 
+   			 id,
+		  	 prod_name,
+		     price,
+		     content,
+		     barcode
+   		from product
+   </select>
+
+	<select id = "selectProductsByProdName" parameterType = "String"  resultMap="product-resultmap" >
+	   		select 
+	   			 id,
+			  	 prod_name,
+			     price,
+			     content,
+			     barcode
+	   		from product
+	   		where prod_name like concat('%' ,#{value}, '%');
+	   </select>
+	   
+	   <select id="selectProductsByBarcode" parameterType="String" resultMap="product-resultmap">
+	  		select 
+	   			 id,
+			  	 prod_name,
+			     price,
+			     content,
+			     barcode
+	   		from product
+	   		where barcode like concat('%' ,#{value}, '%');
+	   </select>
+
+
+
+</mapper>

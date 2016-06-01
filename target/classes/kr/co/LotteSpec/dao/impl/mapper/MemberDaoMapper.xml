@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+   PUBLIC "-//mybatis.org//DTD mapper 3.0/EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="kr.co.LotteSpec.dao.impl.mapper.MemberDaoMapper">
+   <resultMap id="member-resultmap" type="Member">
+      <id property="id" column="id" />
+      <result property="email" column="email" />
+      <result property="password" column="password" />
+      <result property="admin" column="admin" />
+   </resultMap>
+
+   <select id="selectMemberById"  parameterType = "long" resultMap="member-resultmap">
+      select
+	      id,
+	      email,
+	      password,
+	      admin
+      from member
+      where id = #{value}
+   </select>
+   
+   <select id = "selectMemberByEmail" parameterType="String" resultMap="member-resultmap" >
+   		select 
+   			id, 
+   			email,
+   			password,
+   			admin
+   		from member
+   		where email = #{value}
+   </select>
+
+</mapper>

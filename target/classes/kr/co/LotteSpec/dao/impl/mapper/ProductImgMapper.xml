@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+   PUBLIC "-//mybatis.org//DTD mapper 3.0/EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="kr.co.LotteSpec.dao.impl.mapper.ProductImgMapper">
+   <resultMap id="productimg-resultmap" type="ProductImg">
+      <id property="prodId" column="prod_id" />
+      <result property="imageUri" column="img_uri" />
+   </resultMap>
+
+   <select id="selectProductUri"  parameterType = "integer" resultMap="productimg-resultmap">
+      select
+	      prod_id,
+	      img_uri
+      from product_img
+      where prod_id = #{value}
+   </select>
+   
+</mapper>

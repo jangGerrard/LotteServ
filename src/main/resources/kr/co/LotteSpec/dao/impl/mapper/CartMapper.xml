@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+   PUBLIC "-//mybatis.org//DTD mapper 3.0/EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="kr.co.LotteSpec.dao.impl.mapper.CartMapper">
+   <resultMap id="cart-resultmap" type="Cart">
+      <id property="memId" column="mem_id" />
+      <result property="prodId" column="prod_id" />
+   </resultMap>
+
+   <select id="selectProductsByMemId"  parameterType = "integer" resultMap="cart-resultmap">
+      select
+	      mem_id,
+	      prod_id
+      from cart
+      where mem_id = #{value}
+   </select>
+   
+   <insert id="insertProductIntoCart" parameterType="Cart" >
+	   insert into cart(
+		      mem_id, 
+		      prod_id
+	      )
+	      values(
+		      #{memId},
+		      #{prodId}
+	      )
+   </insert>
+   
+   <delete id="deleteCartItem" parameterType="Cart">
+		delete from cart
+		where mem_id= #{memId} and prod_id = #{prodId}
+	</delete>
+
+</mapper>
